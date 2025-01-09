@@ -1,17 +1,17 @@
 import Navbar from '@/components/partial/Navbar';
 import Socmeds from '@/components/partial/Socmeds';
 import { getDetailProject } from '@/server/project';
+
 import dayjs from 'dayjs';
 import { Clock } from 'lucide-react';
-import { headers } from 'next/headers';
+
 import Image from 'next/image';
 
 import * as React from 'react';
 
-export default async function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function Layout({ children, params }: Readonly<{ children: React.ReactNode; params: Promise<{ slug: string }> }>) {
   try {
-    const requestUrl = (await headers()).get('x-url');
-    const slug = requestUrl?.split('project/')[1];
+    const slug = (await params).slug;
 
     if (!slug) {
       throw 'not found';
