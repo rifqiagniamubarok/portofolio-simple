@@ -1,3 +1,3 @@
-import Signlys, { metadata as metadataSignlys } from './signlys.mdx';
+import Signlys from './signlys.mdx';
 
-export { Signlys, metadataSignlys };
+export { Signlys };
