@@ -6,6 +6,7 @@ const ProjectPeek = ({ name, thumbnail, slug, description, tags }: { name: strin
     <Link
       href={`/project/${slug}`}
       className="grid grid-cols-4 gap-4 items-start hover:bg-background-hover cursor-pointer p-4 transition-colors duration-200 rounded-sm hover:bg-opacity-50 hover:bg-blur-lg hover:shadow-md"
+      prefetch={true}
     >
       <div>
         <div className="relative w-full aspect-video bg-black border border-foreground rounded-sm overflow-hidden">

@@ -22,7 +22,7 @@ export const getDetailProject = async (slug: string) => {
     });
 
     if (isProjectExist === 0) {
-      throw 'Project not found';
+      return null;
     }
 
     const project = await prisma.project.findFirst({
@@ -45,6 +45,7 @@ export const getDetailProject = async (slug: string) => {
 
     return project;
   } catch (error) {
-    throw error;
+    console.error(error);
+    return null;
   }
 };
