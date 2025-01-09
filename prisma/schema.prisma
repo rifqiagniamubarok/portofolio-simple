@@ -18,22 +18,26 @@ model project {
   id            Int   @id @default(autoincrement())
   name          String
   slug          String
-  poster        String
+  thumnail      String
   description   String
   tags          String
-  isPublished  Boolean @default(false)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt @default(now())
+  views         Int     @default(0)
+  likes         Int     @default(0)
+  isPublished   Boolean @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt @default(now())
 }
 
 model blog {
   id            Int   @id @default(autoincrement())
   name          String
   slug          String
-  poster        String
+  thumnail      String
   description   String
   tags          String
-  isPublished  Boolean @default(false)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt @default(now())
+  views         Int     @default(0)
+  likes         Int     @default(0)
+  isPublished   Boolean @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt @default(now())
 }
