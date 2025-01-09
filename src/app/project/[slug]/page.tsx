@@ -1,7 +1,7 @@
 import * as Projects from '@/projects';
-import { getDetailProject } from '@/server/project';
+import { getDetailProject, viewProject } from '@/server/project';
 import dayjs from 'dayjs';
-import { Clock } from 'lucide-react';
+import { Clock, Eye } from 'lucide-react';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -51,6 +51,7 @@ export default async function page({ params }: Readonly<{ params: Promise<{ slug
     }
 
     const project = await getDetailProject(slug);
+    await viewProject(slug);
 
     if (!project) {
       return notFound();
@@ -61,6 +62,15 @@ export default async function page({ params }: Readonly<{ params: Promise<{ slug
         <div className="w-fit max-w-[634px] mb-10 pt-5 space-y-4">
           <div>
             <p className="text-3xl font-semibold text-black capitalize">{project?.name}</p>
+            <div className="flex flex-wrap items-center gap-2 my-2">
+              {project?.tags.split(',').map((t) => {
+                return (
+                  <div key={t} className="text-sm italic">
+                    #{t}
+                  </div>
+                );
+              })}
+            </div>
             <p className="text-base ">{project?.description}</p>
           </div>
           <div>
@@ -75,9 +85,15 @@ export default async function page({ params }: Readonly<{ params: Promise<{ slug
                   <p className="text-xs leading-none">{dayjs(project?.createdAt).format('MMMM DD, YYYY')}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-1">
-                <Clock size={14} />
-                <p className="text-sm">12 min read</p>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-1">
+                  <Clock size={14} />
+                  <p className="text-sm">12 min read</p>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Eye size={14} />
+                  <p className="text-sm">{project?.views}</p>
+                </div>
               </div>
             </div>
             <div className="w-full  bg-black h-[1px]"></div>

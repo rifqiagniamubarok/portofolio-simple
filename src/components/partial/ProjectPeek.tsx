@@ -14,7 +14,7 @@ const ProjectPeek = ({ name, thumbnail, slug, description, tags }: { name: strin
         </div>
       </div>
       <div className="col-span-3">
-        <p className="font-medium leading-none">{name}</p>
+        <p className="font-medium leading-none capitalize">{name}</p>
         <div className="w-3 h-0.5 bg-black mt-1"></div>
         <p className="text-sm">{description}</p>
         <div className="flex items-center flex-wrap gap-2 mt-2">

@@ -32,9 +32,29 @@ export const getDetailProject = async (slug: string) => {
       },
     });
 
-    await prisma.project.update({
+    return project;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const viewProject = async (slug: string) => {
+  try {
+    const isProjectExist = await prisma.project.count({
       where: {
-        id: project?.id,
+        slug: slug,
+        isPublished: true,
+      },
+    });
+
+    if (isProjectExist === 0) {
+      return null;
+    }
+
+    const project = await prisma.project.updateMany({
+      where: {
+        slug: slug,
       },
       data: {
         views: {
