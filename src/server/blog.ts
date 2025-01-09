@@ -2,58 +2,58 @@
 
 import prisma from '@/lib/prismaClient';
 
-export const getAllProjects = async () => {
+export const getAllBlogs = async () => {
   try {
-    const projects = await prisma.project.findMany();
+    const blogs = await prisma.blog.findMany();
 
-    return projects;
+    return blogs;
   } catch (error) {
-    console.error(error);
-    throw null;
+    console.log(error);
+    return null;
   }
 };
 
-export const getDetailProject = async (slug: string) => {
+export const getDetailBlog = async (slug: string) => {
   try {
-    const isProjectExist = await prisma.project.count({
+    const isBlogExist = await prisma.blog.count({
       where: {
         slug: slug,
         isPublished: true,
       },
     });
 
-    if (isProjectExist === 0) {
+    if (isBlogExist === 0) {
       return null;
     }
 
-    const project = await prisma.project.findFirst({
+    const blog = await prisma.blog.findFirst({
       where: {
         slug: slug,
         isPublished: true,
       },
     });
 
-    return project;
+    return blog;
   } catch (error) {
     console.error(error);
     return null;
   }
 };
 
-export const viewProject = async (slug: string) => {
+export const viewBlog = async (slug: string) => {
   try {
-    const isProjectExist = await prisma.project.count({
+    const isBlogExist = await prisma.blog.count({
       where: {
         slug: slug,
         isPublished: true,
       },
     });
 
-    if (isProjectExist === 0) {
+    if (isBlogExist === 0) {
       return null;
     }
 
-    const project = await prisma.project.updateMany({
+    const blog = await prisma.blog.updateMany({
       where: {
         slug: slug,
       },
@@ -64,7 +64,7 @@ export const viewProject = async (slug: string) => {
       },
     });
 
-    return project;
+    return blog;
   } catch (error) {
     console.error(error);
     return null;

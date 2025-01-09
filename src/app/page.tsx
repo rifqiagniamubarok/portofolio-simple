@@ -2,6 +2,7 @@ import BlogPeek from '@/components/partial/BlogPeek';
 import Navbar from '@/components/partial/Navbar';
 import ProjectPeek from '@/components/partial/ProjectPeek';
 import Socmeds from '@/components/partial/Socmeds';
+import { getAllBlogs } from '@/server/blog';
 import { getAllProjects } from '@/server/project';
 
 const ExperienceItem = ({ date, company, position, description, techs }: { date: string; company: string; position: string; description: string; techs: string[] }) => {
@@ -66,6 +67,7 @@ const experiences = [
 
 export default async function Home() {
   const projects = await getAllProjects();
+  const blogs = await getAllBlogs();
   return (
     <>
       <div className="fixed w-[48vw] left-0 inset-y-0 h-full ">
@@ -119,7 +121,11 @@ export default async function Home() {
               </section>
               <section id="blog" className="space-y-4">
                 <p className="font-medium px-4">Blog_</p>
-                <BlogPeek />
+                <div>
+                  {blogs?.map((blog) => {
+                    return <BlogPeek key={blog.id} name={blog.name} slug={blog.slug} thumbnail={blog.thumbnail} description={blog.description} tags={blog.tags} />;
+                  })}
+                </div>
               </section>
             </div>
           </div>

@@ -33,7 +33,7 @@ model blog {
   id            Int   @id @default(autoincrement())
   name          String
   slug          String
-  thumnail      String
+  thumbnail     String @default("/blogs/prismaNextJs.jpg")
   description   String
   tags          String
   views         Int     @default(0)
